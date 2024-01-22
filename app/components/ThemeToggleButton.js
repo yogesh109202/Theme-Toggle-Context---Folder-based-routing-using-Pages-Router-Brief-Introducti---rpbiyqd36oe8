@@ -1,22 +1,13 @@
 'use client'
-import React from 'react';
-// import { useState } from 'react';
-import { useThemeContext } from './ThemeProvider';
-const ThemeToggleButton = () =>{
-    let context=useThemeContext();
-    let {global, setGlobal, setLocal}=context;
-    return (
-       <>
-        <button id='global-theme-toggler' onClick={()=>{
-            setGlobal(!global);
-            setLocal(!global);
-            
-            }}
-            className={global?"btn btn-light txt-light":"btn btn-dark txt-dark"}
+import React, { useContext } from 'react';
+import { ThemeContext } from './ThemeProvider';
 
-            >{global ?"Switch to dark theme" :'Switch to light theme'} </button>
-        </>
+
+const ThemeToggleButton = () => {
+    const { theme, toggleTheme } = useContext(ThemeContext)
+    return (
+        <button id="global-theme-toggler" className={`btn btn-${theme}`} onClick={toggleTheme}>Switch to {theme === 'light' ? 'dark' : 'light'} theme</button>
     )
 
 }
-export {ThemeToggleButton};
+export { ThemeToggleButton }
